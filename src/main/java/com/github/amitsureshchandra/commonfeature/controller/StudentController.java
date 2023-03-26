@@ -1,17 +1,17 @@
 package com.github.amitsureshchandra.commonfeature.controller;
 
+import com.github.amitsureshchandra.commonfeature.controller.feature.IBaseCRUController;
+import com.github.amitsureshchandra.commonfeature.controller.feature.IBaseStatusController;
 import com.github.amitsureshchandra.commonfeature.entity.Student;
-import com.github.amitsureshchandra.commonfeature.service.BaseCRUService;
-import com.github.amitsureshchandra.commonfeature.service.BaseStatusService;
-import com.github.amitsureshchandra.commonfeature.service.RepoRegisterService;
+import com.github.amitsureshchandra.commonfeature.service.feature.IBaseCRUService;
+import com.github.amitsureshchandra.commonfeature.service.feature.IBaseStatusService;
 import com.github.amitsureshchandra.commonfeature.service.StudentService;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/students")
-public class StudentController implements BaseStatusController<Long>, BaseCRUController<Student, Long, Student, Student> {
+public class StudentController implements IBaseStatusController<Student, Long>, IBaseCRUController<Student, Long, Student, Student> {
 
     private final StudentService studentService;
 
@@ -20,12 +20,12 @@ public class StudentController implements BaseStatusController<Long>, BaseCRUCon
     }
 
     @Override
-    public BaseStatusService<Long> getStatusService() {
+    public IBaseStatusService<Student, Long> getStatusService() {
         return studentService;
     }
 
     @Override
-    public BaseCRUService<Student, Long, Student, Student > getCRUService() {
+    public IBaseCRUService<Student, Long, Student, Student > getCRUService() {
         return studentService;
     }
 

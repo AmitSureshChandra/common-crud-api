@@ -1,4 +1,4 @@
-package com.github.amitsureshchandra.commonfeature.entity;
+package com.github.amitsureshchandra.commonfeature.entity.base;
 
 import com.github.amitsureshchandra.commonfeature.enums.StatusEnum;
 import lombok.Data;

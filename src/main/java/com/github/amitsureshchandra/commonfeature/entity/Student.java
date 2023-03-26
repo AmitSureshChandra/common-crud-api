@@ -1,6 +1,6 @@
 package com.github.amitsureshchandra.commonfeature.entity;
 
-import com.github.amitsureshchandra.commonfeature.enums.StatusEnum;
+import com.github.amitsureshchandra.commonfeature.entity.base.BaseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,16 +15,11 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Student extends BaseStatus implements RepoNameResolver{
+public class Student extends BaseStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String email;
-
-    @Override
-    public String getRepoName() {
-        return "stuRepo";
-    }
 }

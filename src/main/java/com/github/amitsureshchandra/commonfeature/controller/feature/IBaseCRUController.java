@@ -1,14 +1,14 @@
-package com.github.amitsureshchandra.commonfeature.controller;
+package com.github.amitsureshchandra.commonfeature.controller.feature;
 
-import com.github.amitsureshchandra.commonfeature.service.BaseCRUService;
+import com.github.amitsureshchandra.commonfeature.service.feature.IBaseCRUService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public interface BaseCRUController<T, T_ID, T_CREATE_DTO, T_UPDATE_DTO> {
-    BaseCRUService<T, T_ID, T_CREATE_DTO, T_UPDATE_DTO> getCRUService();
+public interface IBaseCRUController<T, T_ID, T_CREATE_DTO, T_UPDATE_DTO> {
+    IBaseCRUService<T, T_ID, T_CREATE_DTO, T_UPDATE_DTO> getCRUService();
 
     @GetMapping("/{id}")
     default ResponseEntity<T> getById(@PathVariable T_ID id) {

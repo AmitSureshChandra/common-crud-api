@@ -1,24 +1,25 @@
 package com.github.amitsureshchandra.commonfeature.service;
 
-import com.github.amitsureshchandra.commonfeature.repo.StuRepo;
+import com.github.amitsureshchandra.commonfeature.resolver.IRepoNameResolver;
+import com.github.amitsureshchandra.commonfeature.repo.IStudentRepo;
 import com.github.amitsureshchandra.commonfeature.entity.Student;
 import com.github.amitsureshchandra.commonfeature.enums.StatusEnum;
+import com.github.amitsureshchandra.commonfeature.service.feature.IBaseCRUService;
+import com.github.amitsureshchandra.commonfeature.service.feature.IBaseStatusService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class StudentService implements BaseStatusService<Long>, BaseCRUService<Student, Long, Student, Student> {
+public class StudentService extends BaseService implements IBaseStatusService<Student, Long>, IBaseCRUService<Student, Long, Student, Student>, IRepoNameResolver {
 
-    final RepoRegisterService repoRegisterService;
+    final ContextUtilService repoRegisterService;
 
     final ApplicationContext context;
 
-    final StuRepo stuRepo;
+    final IStudentRepo stuRepo;
 
-    public StudentService(RepoRegisterService repoRegisterService, StuRepo stuRepo, ApplicationContext context) {
+    public StudentService(ContextUtilService repoRegisterService, IStudentRepo stuRepo, ApplicationContext context) {
         this.repoRegisterService = repoRegisterService;
         this.stuRepo = stuRepo;
         this.context = context;
@@ -26,17 +27,7 @@ public class StudentService implements BaseStatusService<Long>, BaseCRUService<S
 
     @Override
     public JpaRepository<Student, Long> getRepo() {
-        return repoRegisterService.getRepo("stuRepo");
-    }
-
-    @Override
-    public Student findById(Long aLong) {
-        return stuRepo.findById(aLong).orElseThrow(() -> new RuntimeException("not found"));
-    }
-
-    @Override
-    public List<Student> findAll() {
-        return stuRepo.findAll();
+        return repoRegisterService.getRepo(getRepoName());
     }
 
     @Override
@@ -54,10 +45,7 @@ public class StudentService implements BaseStatusService<Long>, BaseCRUService<S
     }
 
     @Override
-    public String updateStatus(Long aLong, StatusEnum status) {
-        Student student = findById(aLong);
-        student.setStatus(status);
-        stuRepo.save(student);
-        return "OK";
+    public String getRepoName() {
+        return "student_repo";
     }
 }
