@@ -1,23 +1,32 @@
 package com.github.amitsureshchandra.commonfeature.service;
 
-import com.github.amitsureshchandra.commonfeature.StuRepo;
+import com.github.amitsureshchandra.commonfeature.repo.StuRepo;
 import com.github.amitsureshchandra.commonfeature.entity.Student;
 import com.github.amitsureshchandra.commonfeature.enums.StatusEnum;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.context.ApplicationContext;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class StudentService implements BaseStatusService<Long>, BaseCRUService<Student, Long, Student, Student> {
 
+    final RepoRegisterService repoRegisterService;
+
+    final ApplicationContext context;
+
     final StuRepo stuRepo;
 
-    public StudentService(StuRepo stuRepo) {
+    public StudentService(RepoRegisterService repoRegisterService, StuRepo stuRepo, ApplicationContext context) {
+        this.repoRegisterService = repoRegisterService;
         this.stuRepo = stuRepo;
+        this.context = context;
+    }
+
+    @Override
+    public JpaRepository<Student, Long> getRepo() {
+        return repoRegisterService.getRepo("stuRepo");
     }
 
     @Override

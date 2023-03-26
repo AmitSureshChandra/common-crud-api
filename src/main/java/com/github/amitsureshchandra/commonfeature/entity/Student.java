@@ -15,11 +15,16 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Student extends BaseStatus{
+public class Student extends BaseStatus implements RepoNameResolver{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String email;
+
+    @Override
+    public String getRepoName() {
+        return "stuRepo";
+    }
 }
