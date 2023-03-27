@@ -1,6 +1,29 @@
 # common-feature-controller
 Implementing common feature controller
 
+## sample for main 
+
+```java
+package com.github.amitsureshchandra.commonfeatureapplication;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+
+@SpringBootApplication
+@ComponentScan({
+        "com.github.amitsureshchandra.commonfeature",
+        "com.github.amitsureshchandra.commonfeatureapplication"
+})
+public class CommonFeatureApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(CommonFeatureApplication.class, args);
+    }
+
+}
+```
+
 ## sample for controller
 
 ```java
