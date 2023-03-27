@@ -130,6 +130,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository("student_repo")
-public interface IStudentRepo extends JpaRepository<Student, Long> {
+public interface IStudentRepo extends IStatusRepo<Student, Long> {
 }
 ```
