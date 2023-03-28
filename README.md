@@ -73,8 +73,6 @@ package com.github.amitsureshchandra.commonfeatureapplication.service;
 
 import com.github.amitsureshchandra.commonfeature.enums.StatusEnum;
 import com.github.amitsureshchandra.commonfeature.resolver.IRepoNameResolver;
-import com.github.amitsureshchandra.commonfeature.service.BaseService;
-import com.github.amitsureshchandra.commonfeature.service.ContextUtilService;
 import com.github.amitsureshchandra.commonfeature.service.feature.IBaseCRUService;
 import com.github.amitsureshchandra.commonfeature.service.feature.IBaseStatusService;
 import com.github.amitsureshchandra.commonfeatureapplication.entity.Student;

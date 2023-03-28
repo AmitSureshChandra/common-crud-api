@@ -1,5 +1,6 @@
 package com.github.amitsureshchandra.commonfeature.config;
 
+import com.github.amitsureshchandra.commonfeature.convertor.UUIDToLongConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,8 @@ public class Config {
 
     @Bean
     ModelMapper modelMapper(){
-        return new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.addConverter(new UUIDToLongConverter());
+        return modelMapper;
     }
 }
