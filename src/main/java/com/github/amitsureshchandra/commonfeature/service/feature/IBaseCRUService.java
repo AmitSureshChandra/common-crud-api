@@ -44,14 +44,14 @@ public interface IBaseCRUService<T, T_ID, T_CREATE_DTO, T_UPDATE_DTO> extends IG
     }
 
     default T update(T_ID id, T_UPDATE_DTO updateDto) {
-        validateOnUpdate(id, updateDto);
         T entity = findById(id);
+        validateOnUpdate(entity, updateDto);
         updateFields(entity, updateDto);
         beforeUpdate(entity, updateDto);
         return getRepo().save(entity);
     }
 
-    default void validateOnUpdate(T_ID id, T_UPDATE_DTO updateDto){}
+    default void validateOnUpdate(T id, T_UPDATE_DTO updateDto){}
 
     default void updateFields(T entity, T_UPDATE_DTO updateDto) {
         Map<String, Field> updateFields = new HashMap<>();
