@@ -25,13 +25,15 @@ public interface IBaseCRUService<T, T_ID, T_CREATE_DTO, T_UPDATE_DTO> extends IG
 
     default void beforeCreate(T entity, T_CREATE_DTO dto) {
     }
-
     default T create(T_CREATE_DTO dto) {
+        validateOnCreate(dto);
         Type type = getEntityType();
         T entity = ((ModelMapper)(getAppContext().getBean("modelMapper"))).map(dto, type);
         beforeCreate(entity, dto);
         return getRepo().save(entity);
     }
+
+    default void validateOnCreate(T_CREATE_DTO dto) {}
 
     default Type getEntityType() {
         return ((Class<T>) ((ParameterizedType) getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0]);
@@ -42,11 +44,14 @@ public interface IBaseCRUService<T, T_ID, T_CREATE_DTO, T_UPDATE_DTO> extends IG
     }
 
     default T update(T_ID id, T_UPDATE_DTO updateDto) {
+        validateOnUpdate(id, updateDto);
         T entity = findById(id);
         updateFields(entity, updateDto);
         beforeUpdate(entity, updateDto);
         return getRepo().save(entity);
     }
+
+    default void validateOnUpdate(T_ID id, T_UPDATE_DTO updateDto){}
 
     default void updateFields(T entity, T_UPDATE_DTO updateDto) {
         Map<String, Field> updateFields = new HashMap<>();
