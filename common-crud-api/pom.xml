@@ -64,5 +64,11 @@
             </plugin>
         </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>common_crud_api</id>
+            <url>https://maven.pkg.jetbrains.space/mycompany/p/projectkey/my-maven-repo</url>
+        </repository>
+    </distributionManagement>
 
 </project>
